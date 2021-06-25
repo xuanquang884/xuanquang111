@@ -1,0 +1,60 @@
+﻿@model IEnumerable<BaiTap_3.Models.Book>
+
+@{
+    ViewBag.Title = "ListBook";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ListBook</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+           Tiêu Đề 
+        </th>
+        <th>
+            Mô tả
+        </th>
+        <th>
+            Tác Giả
+        </th>
+        <th>
+            Hình Ảnh 
+        <th>
+            Giá 
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.author)
+        </td>
+        <td>
+            <img src="~/Images/@item.image" style="height:80px;width:auto" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+        <td>
+            <a class="btn btn-primary" href=" @Url.Action("Buy", "Book", new { id=item.id })">Buy</a>
+        </td>
+    </tr>
+}
+
+</table>
